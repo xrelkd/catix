@@ -1,0 +1,41 @@
+[package]
+name                 = "catix"
+description          = "Nix binary cache proxy service"
+version.workspace    = true
+authors.workspace    = true
+homepage.workspace   = true
+readme.workspace     = true
+repository.workspace = true
+license.workspace    = true
+edition.workspace    = true
+categories.workspace = true
+keywords.workspace   = true
+
+[dependencies]
+tracing            = "0.1"
+tracing-journald   = "0.3"
+tracing-subscriber = "0.3"
+
+http-serde = "2"
+serde      = { version = "1", features = ["derive"] }
+serde_with = "3"
+toml       = "0.8"
+
+futures = "0.3"
+sigfinn = "0.2"
+tokio   = { version = "1", features = ["rt-multi-thread", "sync"] }
+
+clap          = { version = "4", features = ["derive", "env"] }
+clap_complete = "4"
+http          = "1"
+shadow-rs     = "0.26"
+snafu         = "0.8"
+
+catix-base   = { path = "../crates/base" }
+catix-server = { path = "../crates/server" }
+
+[build-dependencies]
+shadow-rs = "0.26"
+
+[lints]
+workspace = true
