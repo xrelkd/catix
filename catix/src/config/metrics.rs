@@ -19,7 +19,7 @@ impl MetricsConfig {
     pub const fn socket_address(&self) -> SocketAddr { SocketAddr::new(self.host, self.port) }
 
     #[inline]
-    pub const fn default_enable() -> bool { true }
+    pub const fn default_enable() -> bool { false }
 
     #[inline]
     pub const fn default_host() -> IpAddr { catix_base::DEFAULT_METRICS_HOST }

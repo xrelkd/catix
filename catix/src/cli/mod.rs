@@ -1,4 +1,4 @@
-use std::{io::Write, path::PathBuf};
+use std::{io::Write, net::IpAddr, path::PathBuf};
 
 use clap::{CommandFactory, Parser, Subcommand};
 use snafu::ResultExt;
@@ -18,6 +18,37 @@ use crate::{config::Config, error, error::Error, shadow};
 pub struct Cli {
     #[command(subcommand)]
     commands: Option<Commands>,
+
+    #[arg(long = "host", help = "The address to bind to")]
+    host: Option<IpAddr>,
+
+    #[arg(long = "port", short = 'p', help = "The port to bind to")]
+    port: Option<u16>,
+
+    #[arg(long = "enable-metrics", help = "Enable metrics")]
+    enable_metrics: bool,
+
+    #[arg(long = "metrics-host", help = "The address of metrics to bind to")]
+    metrics_host: Option<IpAddr>,
+
+    #[arg(long = "metrics-port", help = "The port of metrics to bind to")]
+    metrics_port: Option<u16>,
+
+    #[arg(
+        long = "upstream-servers",
+        short = 's',
+        aliases = ["substituters"],
+        help = "Specify upstream servers"
+    )]
+    upstream_servers: Vec<http::Uri>,
+
+    #[arg(
+        long = "extra-upstream-servers",
+        short = 'e',
+        aliases = ["extra-substituters"],
+        help = "Specify extra upstream servers"
+    )]
+    extra_upstream_servers: Vec<http::Uri>,
 
     #[arg(long = "log-level", env = "CATIX_LOG_LEVEL", help = "Specify a log level")]
     log_level: Option<tracing::Level>,
@@ -48,9 +79,19 @@ impl Default for Cli {
 }
 
 impl Cli {
-    #[allow(clippy::too_many_lines)]
     pub fn run(self) -> Result<(), Error> {
-        let Self { commands, log_level, config_file } = self;
+        let Self {
+            commands,
+            host,
+            port,
+            enable_metrics,
+            metrics_host,
+            metrics_port,
+            upstream_servers,
+            extra_upstream_servers,
+            log_level,
+            config_file,
+        } = self;
 
         match commands {
             Some(Commands::Completions { shell }) => {
@@ -71,6 +112,33 @@ impl Cli {
         }
 
         let mut config = Config::load_or_default(config_file.unwrap_or_else(Config::default_path));
+
+        if let Some(host) = host {
+            config.web.host = host;
+        }
+
+        if let Some(port) = port {
+            config.web.port = port;
+        }
+
+        if enable_metrics {
+            config.metrics.enable = true;
+        }
+
+        if let Some(host) = metrics_host {
+            config.metrics.host = host;
+        }
+
+        if let Some(port) = metrics_port {
+            config.metrics.port = port;
+        }
+
+        if !upstream_servers.is_empty() {
+            config.upstream_servers = upstream_servers;
+        }
+
+        config.upstream_servers.extend(extra_upstream_servers);
+
         if let Some(log_level) = log_level {
             config.log.level = log_level;
         }

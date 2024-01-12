@@ -10,8 +10,11 @@ use snafu::ResultExt;
 
 pub use self::{error::Error, log::LogConfig, metrics::MetricsConfig, web::WebConfig};
 
-#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Config {
+    #[serde(with = "http_serde_ext::uri::vec")]
+    pub upstream_servers: Vec<http::Uri>,
+
     #[serde(default)]
     pub log: LogConfig,
 
@@ -53,11 +56,22 @@ impl Config {
     }
 }
 
+impl Default for Config {
+    fn default() -> Self {
+        Self {
+            upstream_servers: vec!["https://cache.nixos.org".parse().expect("valid uri")],
+            log: LogConfig::default(),
+            web: WebConfig::default(),
+            metrics: MetricsConfig::default(),
+        }
+    }
+}
+
 impl From<Config> for catix_server::Config {
-    fn from(Config { web, metrics, .. }: Config) -> Self {
+    fn from(Config { web, metrics, upstream_servers, .. }: Config) -> Self {
         let metrics = catix_server::config::MetricsConfig::from(metrics);
         let web = catix_server::config::WebConfig::from(web);
 
-        Self { web, metrics }
+        Self { upstream_servers, web, metrics }
     }
 }

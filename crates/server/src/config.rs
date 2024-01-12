@@ -2,6 +2,8 @@ use std::net::SocketAddr;
 
 #[derive(Clone, Debug)]
 pub struct Config {
+    pub upstream_servers: Vec<http::Uri>,
+
     pub web: WebConfig,
 
     pub metrics: MetricsConfig,

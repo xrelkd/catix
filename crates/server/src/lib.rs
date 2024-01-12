@@ -20,12 +20,12 @@ use crate::metrics::Metrics;
 ///
 /// This function will return an error if the server fails to start.
 pub async fn serve_with_shutdown(
-    Config { metrics: metrics_config, web: web_config }: Config,
+    Config { upstream_servers, metrics: metrics_config, web }: Config,
 ) -> Result<()> {
     let lifecycle_manager = LifecycleManager::<Error>::new();
 
-    let _handle =
-        lifecycle_manager.spawn("Web server", create_web_server_future(web_config.listen_address));
+    let _handle = lifecycle_manager
+        .spawn("Web server", create_web_server_future(web.listen_address, upstream_servers));
 
     if metrics_config.enable {
         let metrics = Metrics::new()?;
@@ -46,6 +46,7 @@ pub async fn serve_with_shutdown(
 
 fn create_web_server_future(
     listen_address: SocketAddr,
+    upstream_servers: Vec<http::Uri>,
 ) -> impl FnOnce(Shutdown) -> Pin<Box<dyn Future<Output = ExitStatus<Error>> + Send>> {
     move |shutdown_signal| {
         async move {
@@ -53,8 +54,11 @@ fn create_web_server_future(
 
             let middleware_stack = tower::ServiceBuilder::new();
 
+            let http_client = reqwest::Client::new();
             let router = axum::Router::new()
-                .merge(web::controller::api_v1_router())
+                .merge(web::controller::new_router())
+                .layer(axum::Extension(upstream_servers))
+                .layer(axum::Extension(http_client))
                 .layer(middleware_stack)
                 .into_make_service_with_connect_info::<SocketAddr>();
 
