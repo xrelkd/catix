@@ -1,7 +1,10 @@
+mod proxy;
 mod system;
 
-use axum::Router;
+use axum::{routing, Router};
 
-pub fn api_v1_router() -> Router {
-    Router::new().nest("/api", Router::new().merge(self::system::v1()))
+pub fn new_router() -> Router {
+    Router::new()
+        .nest("/api", Router::new().merge(self::system::v1()))
+        .fallback(routing::any(self::proxy::execute))
 }

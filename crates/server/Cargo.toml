@@ -28,9 +28,15 @@ tokio = { version = "1", features = [
 ] }
 tokio-stream = { version = "0.1", features = ["net"] }
 
-axum       = "0.7"
-http       = "1"
-tower      = { version = "0.4", features = ["timeout"] }
+axum = "0.7"
+http = "1"
+reqwest = { version = "0.11", default-features = false, features = [
+  "json",
+  "rustls",
+  "rustls-tls",
+  "stream",
+] }
+tower = { version = "0.4", features = ["timeout"] }
 tower-http = { version = "0.5", features = ["trace"] }
 
 lazy_static = "1"
