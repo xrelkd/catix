@@ -207,7 +207,7 @@ dependencies = [
  "clap_complete",
  "futures",
  "http 1.0.0",
- "http-serde",
+ "http-serde-ext",
  "serde",
  "serde_with",
  "shadow-rs",
@@ -748,10 +748,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "http-serde"
-version = "2.0.0"
+name = "http-serde-ext"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7fb7239a6d49eda628c2dfdd7e982c59b0c3f0fb99ce45c4237f02a520030688"
+checksum = "9d8178c1e38a9bb22563a06162f04ccb15fb04129101403b16f0db5ed837a454"
 dependencies = [
  "http 1.0.0",
  "serde",
