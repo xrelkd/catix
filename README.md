@@ -91,7 +91,13 @@ catix help
 catix version
 
 # Start proxy server.
-catix
+catix --host 0.0.0.0 \
+  --port 8080 \
+  --upstream-servers https://cache.nixos.org \
+  --upstream-servers http://127.0.0.1:8000 &
+
+# Install package `hello` via `catix`
+nix profile install --option substituters http://127.0.0.1:8080 'nixpkgs/nixos-unstable#hello'
 ```
 
 ## Configuration
@@ -111,27 +117,27 @@ catix default-config > $XDG_CONFIG_HOME/catix/catix.toml
 
 ```toml
 [log]
-# Emit log to systemd-journald
+# Emit log to systemd-journald.
 emit_journald = true
-# Emit log to stdout
+# Emit log to stdout.
 emit_stdout = false
-# Emit log to stderr
+# Emit log to stderr.
 emit_stderr = false
-# Set the log level, available values are "ERROR", "WARN", "INFO", "DEBUG", "TRACE"
+# Set the log level, available values are "ERROR", "WARN", "INFO", "DEBUG", "TRACE".
 level = "INFO"
 
 [web]
-# Host address of HTTP server
+# Host address of HTTP server.
 host = "127.0.0.1"
-# Port of HTTP server, ignored while `enable_http` is `false`
+# Port of HTTP server.
 port = 37000
 
 [metrics]
-# Enable Prometheus metrics
+# Enable Prometheus metrics.
 enable = true
-# Host address of metrics
+# Host address of metrics.
 host = "127.0.0.1"
-# Port of metrics
+# Port of metrics.
 port = 37002
 ```
 
