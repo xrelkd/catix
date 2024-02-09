@@ -42,7 +42,7 @@ cd ~/bin
 
 # Download and extract catix to `~/bin/`.
 # NOTE: replace the version with the version you want to install
-export CATIX_VERSION=v0.1.0
+export CATIX_VERSION=$(basename $(curl -s -w %{redirect_url} https://github.com/xrelkd/catix/releases/latest))
 
 # NOTE: the architecture of your machine,
 # Available values are `x86_64-unknown-linux-musl`, `x86_64-apple-darwin`, `aarch64-apple-darwin`.
