@@ -17,7 +17,7 @@
   outputs = { self, nixpkgs, flake-utils, fenix, crane }:
     let
       name = "catix";
-      version = "0.1.0";
+      version = "0.1.1";
     in
     (flake-utils.lib.eachDefaultSystem
       (system:
