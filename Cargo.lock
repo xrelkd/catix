@@ -749,9 +749,9 @@ dependencies = [
 
 [[package]]
 name = "http-serde-ext"
-version = "1.0.0"
+version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9d8178c1e38a9bb22563a06162f04ccb15fb04129101403b16f0db5ed837a454"
+checksum = "8bad67f8f11a4ddbc06ae7fa6ccbe5c48ca97f4bcd2256ba8df1c09292147a42"
 dependencies = [
  "http 1.0.0",
  "serde",
