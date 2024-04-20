@@ -5,8 +5,7 @@
 , rustPlatform
 , protobuf
 , installShellFiles
-, Security
-, SystemConfiguration
+, darwin
 }:
 
 rustPlatform.buildRustPackage {
@@ -19,9 +18,9 @@ rustPlatform.buildRustPackage {
     lockFile = ../Cargo.lock;
   };
 
-  buildInputs = [ ] ++ lib.optionals stdenv.isDarwin [
-    Security
-    SystemConfiguration
+  buildInputs = lib.optionals stdenv.isDarwin [
+    darwin.apple_sdk.frameworks.Security
+    darwin.apple_sdk.frameworks.SystemConfiguration
   ];
 
   nativeBuildInputs = [
