@@ -68,6 +68,7 @@
           formatter = pkgs.treefmt;
 
           devShells.default = pkgs.callPackage ./devshell {
+            inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
             inherit rustToolchain cargoArgs unitTestArgs;
           };
 
