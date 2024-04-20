@@ -68,14 +68,14 @@
           formatter = pkgs.treefmt;
 
           devShells.default = pkgs.callPackage ./devshell {
-            inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
+            inherit (pkgs) darwin;
             inherit rustToolchain cargoArgs unitTestArgs;
           };
 
           packages = rec {
             default = catix;
             catix = pkgs.callPackage ./devshell/package.nix {
-              inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
+              inherit (pkgs) darwin;
               inherit (cargoToml.workspace.package) version;
               inherit name rustPlatform;
             };
