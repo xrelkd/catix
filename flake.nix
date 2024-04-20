@@ -74,6 +74,7 @@
           packages = rec {
             default = catix;
             catix = pkgs.callPackage ./devshell/package.nix {
+              inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration;
               inherit (cargoToml.workspace.package) version;
               inherit name rustPlatform;
             };

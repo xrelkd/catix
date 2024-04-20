@@ -1,9 +1,12 @@
 { name
 , version
 , lib
+, stdenv
 , rustPlatform
 , protobuf
 , installShellFiles
+, Security
+, SystemConfiguration
 }:
 
 rustPlatform.buildRustPackage {
@@ -15,6 +18,11 @@ rustPlatform.buildRustPackage {
   cargoLock = {
     lockFile = ../Cargo.lock;
   };
+
+  buildInputs = [ ] ++ lib.optionals stdenv.isDarwin [
+    Security
+    SystemConfiguration
+  ];
 
   nativeBuildInputs = [
     protobuf
