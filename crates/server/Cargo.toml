@@ -36,7 +36,7 @@ reqwest = { version = "0.11", default-features = false, features = [
   "rustls-tls",
   "stream",
 ] }
-tower = { version = "0.4", features = ["timeout"] }
+tower = { version = "0.5", features = ["timeout"] }
 tower-http = { version = "0.5", features = ["trace"] }
 
 lazy_static = "1"
