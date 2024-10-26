@@ -28,14 +28,14 @@ tokio   = { version = "1", features = ["rt-multi-thread", "sync"] }
 clap          = { version = "4", features = ["derive", "env"] }
 clap_complete = "4"
 http          = "1"
-shadow-rs     = "0.33"
+shadow-rs     = "0.35"
 snafu         = "0.8"
 
 catix-base   = { path = "../crates/base" }
 catix-server = { path = "../crates/server" }
 
 [build-dependencies]
-shadow-rs = "0.33"
+shadow-rs = "0.35"
 
 [lints]
 workspace = true
