@@ -6,9 +6,6 @@ pub enum Error {
     #[snafu(display("Could not create tokio runtime, error: {source}"))]
     InitializeTokioRuntime { source: std::io::Error },
 
-    #[snafu(display("Error occurs while running lifecycle manager, error: {source}"))]
-    LifecycleManager { source: sigfinn::Error },
-
     #[snafu(display("{source}"))]
     Application { source: catix_server::Error },
 
