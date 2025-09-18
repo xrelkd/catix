@@ -28,7 +28,7 @@ tokio = { version = "1", features = [
 ] }
 tokio-stream = { version = "0.1", features = ["net"] }
 
-axum = "0.7"
+axum = "0.8"
 http = "1"
 reqwest = { version = "0.11", default-features = false, features = [
   "json",
@@ -39,10 +39,9 @@ reqwest = { version = "0.11", default-features = false, features = [
 tower = { version = "0.5", features = ["timeout"] }
 tower-http = { version = "0.6", features = ["trace"] }
 
-lazy_static = "1"
-prometheus  = "0.13"
-semver      = "1"
-snafu       = "0.8"
+prometheus = "0.14"
+semver     = "1"
+snafu      = "0.8"
 
 catix-base    = { path = "../base" }
 catix-metrics = { path = "../metrics" }
