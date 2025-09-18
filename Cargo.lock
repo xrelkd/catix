@@ -205,7 +205,7 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
 name = "catix"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "catix-base",
  "catix-server",
@@ -228,7 +228,7 @@ dependencies = [
 
 [[package]]
 name = "catix-base"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "bytes",
  "directories",
@@ -242,7 +242,7 @@ dependencies = [
 
 [[package]]
 name = "catix-metrics"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "async-trait",
  "axum",
@@ -257,7 +257,7 @@ dependencies = [
 
 [[package]]
 name = "catix-server"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "async-trait",
  "axum",
