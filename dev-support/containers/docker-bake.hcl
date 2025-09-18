@@ -8,8 +8,8 @@ target "catix" {
   target     = "catix"
   contexts = {
     sccache = "docker-image://ghcr.io/thxnet/ci-containers/sccache:0.5.4"
-    rust    = "docker-image://docker.io/library/rust:1.74.0-alpine3.18"
-    alpine  = "docker-image://docker.io/library/alpine:3.18"
+    rust    = "docker-image://docker.io/library/rust:1.89.0-alpine3.22"
+    alpine  = "docker-image://docker.io/library/alpine:3.22"
   }
   args = {
     RUSTC_WRAPPER         = "/usr/bin/sccache"
@@ -35,8 +35,8 @@ target "catix-distroless" {
   target     = "catix"
   contexts = {
     sccache    = "docker-image://ghcr.io/thxnet/ci-containers/sccache:0.5.4"
-    rust       = "docker-image://docker.io/library/rust:1.74-slim-buster"
-    distroless = "docker-image://gcr.io/distroless/cc-debian11:latest"
+    rust       = "docker-image://docker.io/library/rust:1.89-slim-buster"
+    distroless = "docker-image://gcr.io/distroless/cc-debian12:latest"
   }
   args = {
     RUSTC_WRAPPER         = "/usr/bin/sccache"
