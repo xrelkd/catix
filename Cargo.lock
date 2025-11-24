@@ -108,7 +108,7 @@ dependencies = [
  "bytes",
  "form_urlencoded",
  "futures-util",
- "http 1.3.1",
+ "http 1.4.0",
  "http-body 1.0.0",
  "http-body-util",
  "hyper 1.3.1",
@@ -140,7 +140,7 @@ checksum = "68464cd0412f486726fb3373129ef5d2993f90c34bc2bc1c1e9943b2f4fc7ca6"
 dependencies = [
  "bytes",
  "futures-core",
- "http 1.3.1",
+ "http 1.4.0",
  "http-body 1.0.0",
  "http-body-util",
  "mime",
@@ -212,7 +212,7 @@ dependencies = [
  "clap",
  "clap_complete",
  "futures",
- "http 1.3.1",
+ "http 1.4.0",
  "http-serde-ext",
  "serde",
  "serde_with",
@@ -232,7 +232,7 @@ version = "0.1.6"
 dependencies = [
  "bytes",
  "directories",
- "http 1.3.1",
+ "http 1.4.0",
  "mime",
  "semver",
  "serde",
@@ -264,7 +264,7 @@ dependencies = [
  "catix-base",
  "catix-metrics",
  "futures",
- "http 1.3.1",
+ "http 1.4.0",
  "prometheus",
  "reqwest",
  "semver",
@@ -695,12 +695,11 @@ dependencies = [
 
 [[package]]
 name = "http"
-version = "1.3.1"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f4a85d31aea989eead29a3aaf9e1115a180df8282431156e533de47660892565"
+checksum = "e3ba2a386d7f85a81f119ad7498ebe444d2e22c2af0b86b069416ace48b3311a"
 dependencies = [
  "bytes",
- "fnv",
  "itoa",
 ]
 
@@ -722,7 +721,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1cac85db508abc24a2e48553ba12a996e87244a0395ce011e62b37158745d643"
 dependencies = [
  "bytes",
- "http 1.3.1",
+ "http 1.4.0",
 ]
 
 [[package]]
@@ -733,7 +732,7 @@ checksum = "793429d76616a256bcb62c2a2ec2bed781c8307e797e2598c50010f2bee2544f"
 dependencies = [
  "bytes",
  "futures-util",
- "http 1.3.1",
+ "http 1.4.0",
  "http-body 1.0.0",
  "pin-project-lite",
 ]
@@ -744,7 +743,7 @@ version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "665c24b8e7e21688dc74edb228f07c1815bbc7ff3b48a3ee72fa20937fbde095"
 dependencies = [
- "http 1.3.1",
+ "http 1.4.0",
  "serde",
 ]
 
@@ -793,7 +792,7 @@ dependencies = [
  "bytes",
  "futures-channel",
  "futures-util",
- "http 1.3.1",
+ "http 1.4.0",
  "http-body 1.0.0",
  "httparse",
  "httpdate",
@@ -825,7 +824,7 @@ checksum = "7b875924a60b96e5d7b9ae7b066540b1dd1cbd90d1828f54c92e02a283351c56"
 dependencies = [
  "bytes",
  "futures-util",
- "http 1.3.1",
+ "http 1.4.0",
  "http-body 1.0.0",
  "hyper 1.3.1",
  "pin-project-lite",
@@ -1957,7 +1956,7 @@ checksum = "adc82fd73de2a9722ac5da747f12383d2bfdb93591ee6c58486e0097890f05f2"
 dependencies = [
  "bitflags 2.5.0",
  "bytes",
- "http 1.3.1",
+ "http 1.4.0",
  "http-body 1.0.0",
  "pin-project-lite",
  "tower-layer",
