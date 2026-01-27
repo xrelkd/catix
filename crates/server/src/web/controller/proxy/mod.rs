@@ -1,6 +1,6 @@
 use std::{path::PathBuf, str::FromStr};
 
-use axum::{body::Body, http::Request, response::Response, Extension};
+use axum::{Extension, body::Body, http::Request, response::Response};
 use http::StatusCode;
 
 pub async fn execute(
