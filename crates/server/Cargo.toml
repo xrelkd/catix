@@ -12,36 +12,36 @@ categories.workspace = true
 keywords.workspace   = true
 
 [dependencies]
-tracing = "0.1"
+tracing = { workspace = true }
 
-serde      = { version = "1", features = ["derive"] }
-serde_json = "1"
+serde      = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
 
-async-trait = "0.1"
-futures = "0.3"
-sigfinn = "0.2"
-tokio = { version = "1", features = [
+async-trait = { workspace = true }
+futures = { workspace = true }
+sigfinn = { workspace = true }
+tokio = { workspace = true, features = [
   "fs",
   "macros",
   "rt-multi-thread",
   "sync",
 ] }
-tokio-stream = { version = "0.1", features = ["net"] }
+tokio-stream = { workspace = true, features = ["net"] }
 
-axum = "0.8"
-http = "1"
-reqwest = { version = "0.11", default-features = false, features = [
+axum = { workspace = true }
+http = { workspace = true }
+reqwest = { workspace = true, default-features = false, features = [
   "json",
   "rustls",
   "rustls-tls",
   "stream",
 ] }
-tower = { version = "0.5", features = ["timeout"] }
-tower-http = { version = "0.6", features = ["trace"] }
+tower = { workspace = true, features = ["timeout"] }
+tower-http = { workspace = true, features = ["trace"] }
 
-prometheus = "0.14"
-semver     = "1"
-snafu      = "0.8"
+prometheus = { workspace = true }
+semver     = { workspace = true }
+snafu      = { workspace = true }
 
 catix-base    = { path = "../base" }
 catix-metrics = { path = "../metrics" }

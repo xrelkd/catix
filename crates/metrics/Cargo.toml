@@ -12,17 +12,17 @@ categories.workspace = true
 keywords.workspace   = true
 
 [dependencies]
-async-trait = "0.1"
-tokio       = { version = "1", features = ["net"] }
+async-trait = { workspace = true }
+tokio       = { workspace = true, features = ["net"] }
 
-axum       = "0.8"
-tower      = { version = "0.5", features = ["timeout"] }
-tower-http = { version = "0.6", features = ["trace"] }
+axum       = { workspace = true }
+tower      = { workspace = true, features = ["timeout"] }
+tower-http = { workspace = true, features = ["trace"] }
 
-bytes      = "1"
-mime       = "0.3"
-prometheus = "0.14"
-snafu      = "0.8"
+bytes      = { workspace = true }
+mime       = { workspace = true }
+prometheus = { workspace = true }
+snafu      = { workspace = true }
 
 [lints]
 workspace = true
