@@ -1,7 +1,7 @@
 mod proxy;
 mod system;
 
-use axum::{routing, Router};
+use axum::{Router, routing};
 
 pub fn new_router() -> Router {
     Router::new()

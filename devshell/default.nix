@@ -1,12 +1,11 @@
-{
-  rustToolchain,
-  cargoArgs,
-  unitTestArgs,
-  pkgs,
-  lib,
-  stdenv,
-  darwin,
-  ...
+{ rustToolchain
+, cargoArgs
+, unitTestArgs
+, pkgs
+, lib
+, stdenv
+, darwin
+, ...
 }:
 
 let
