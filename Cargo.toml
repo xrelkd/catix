@@ -50,7 +50,7 @@ mime          = "0.3"
 prometheus    = "0.14"
 semver        = "1"
 shadow-rs     = "1"
-snafu         = "0.8"
+snafu         = "0.9"
 time          = { version = "0.3", features = ["formatting", "local-offset", "macros"] }
 
 [workspace.lints.rust]
