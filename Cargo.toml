@@ -1,5 +1,5 @@
 [workspace.package]
-version      = "0.1.7"
+version      = "0.1.8"
 description  = "Nix binary cache proxy service"
 authors      = ["xrelkd <46590321+xrelkd@users.noreply.github.com>"]
 homepage     = "https://github.com/xrelkd/catix"
