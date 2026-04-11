@@ -1,14 +1,15 @@
 [workspace.package]
-version     = "0.1.7"
-authors     = ["xrelkd <46590321+xrelkd@users.noreply.github.com>"]
-homepage    = "https://github.com/xrelkd/catix"
-repository  = "https://github.com/xrelkd/catix"
-readme      = "README.md"
-license     = "GPL-3.0-only"
-edition     = "2024"
-description = "Nix binary cache proxy service"
-categories  = ["proxy"]
-keywords    = ["nix", "proxy"]
+version      = "0.1.7"
+description  = "Nix binary cache proxy service"
+authors      = ["xrelkd <46590321+xrelkd@users.noreply.github.com>"]
+homepage     = "https://github.com/xrelkd/catix"
+repository   = "https://github.com/xrelkd/catix"
+readme       = "README.md"
+license      = "GPL-3.0-only"
+edition      = "2024"
+rust-version = "1.93"
+categories   = ["proxy"]
+keywords     = ["nix", "proxy"]
 
 [workspace]
 resolver = "2"
