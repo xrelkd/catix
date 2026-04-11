@@ -8,7 +8,7 @@ pkgs.runCommandNoCC "check-format"
       shellcheck
 
       nixpkgs-fmt
-      nodePackages.prettier
+      prettier
       shfmt
       taplo
       treefmt

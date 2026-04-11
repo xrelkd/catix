@@ -89,6 +89,7 @@
             inherit (cargoToml.workspace.package) version;
             inherit name catix;
           };
+          check-format = pkgs.callPackage ./devshell/format.nix { };
         };
 
         checks = {
