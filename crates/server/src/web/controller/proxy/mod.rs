@@ -11,7 +11,7 @@ pub async fn execute(
     let method =
         reqwest::Method::try_from(req.method().as_str()).map_err(|_| StatusCode::BAD_REQUEST)?;
 
-    let path_and_query = req.uri().path_and_query();
+    let path_and_query = req.uri().path_and_query().filter(|pq| pq.path().starts_with('/'));
     for upstream_server in &upstream_servers {
         if let Some(uri) = derive_uri(upstream_server, path_and_query) {
             tracing::info!("Try to fetch {uri}");
@@ -51,14 +51,17 @@ fn derive_uri(
     upstream_server: &http::Uri,
     path_and_query: Option<&http::uri::PathAndQuery>,
 ) -> Option<http::Uri> {
-    let path_and_query = path_and_query.map_or_else(String::new, |path_and_query| {
-        let mut path = PathBuf::from_str(upstream_server.path()).unwrap_or_default();
-        path.push(path_and_query.path().trim_start_matches('/'));
-        path_and_query.query().map_or_else(
-            || format!("{}", path.display()),
-            |query| format!("{}?{query}", path.display()),
-        )
-    });
+    let path_and_query = path_and_query.map_or_else(
+        || "/".to_string(),
+        |path_and_query| {
+            let mut path = PathBuf::from_str(upstream_server.path()).unwrap_or_default();
+            path.push(path_and_query.path().trim_start_matches('/'));
+            path_and_query.query().map_or_else(
+                || format!("{}", path.display()),
+                |query| format!("{}?{query}", path.display()),
+            )
+        },
+    );
 
     http::Uri::builder()
         .scheme(upstream_server.scheme().unwrap_or(&http::uri::Scheme::HTTPS).clone())
@@ -73,6 +76,66 @@ mod tests {
     use std::str::FromStr;
 
     use super::derive_uri;
+
+    #[test]
+    fn test_uri_path_and_query_splits() {
+        let cases = [
+            (
+                "/nar/q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo",
+                Some("/nar/q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo"),
+                None,
+            ),
+            (
+                "/nar/q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo?hash=abc",
+                Some("/nar/q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo"),
+                Some("hash=abc"),
+            ),
+            ("/", Some("/"), None),
+            ("/?hash=abc", Some("/"), Some("hash=abc")),
+            (
+                "//q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo",
+                Some("//q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo"),
+                None,
+            ),
+            (
+                "////q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo?hash=abc",
+                Some("////q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo"),
+                Some("hash=abc"),
+            ),
+            ("example.com:443", None, None),
+        ];
+        for (input, expected_path, expected_query) in cases {
+            let uri = http::Uri::from_str(input).unwrap();
+            let pq = uri.path_and_query();
+            let actual = pq.map(|pq| (pq.path(), pq.query()));
+            let expected = expected_path.map(|p| (p, expected_query));
+            assert_eq!(actual, expected, "input: {input}");
+        }
+    }
+
+    #[test]
+    fn test_uri_path_always_starts_with_slash() {
+        let inputs = [
+            "/nar/file.narinfo",
+            "/nar/file.narinfo?hash=abc",
+            "/",
+            "/?hash=abc",
+            "//double",
+            "////quadruple",
+            "https://example.com/path",
+            "https://example.com/path?q=1",
+        ];
+        for input in inputs {
+            let uri = http::Uri::from_str(input).unwrap();
+            let pq = uri.path_and_query();
+            if let Some(pq) = pq {
+                assert!(
+                    pq.path().starts_with('/'),
+                    "path should start with '/' for input: {input}"
+                );
+            }
+        }
+    }
 
     #[test]
     fn test_derive_uri() {
@@ -92,13 +155,15 @@ mod tests {
             )
         );
 
+        // Realistic production scenario from execute():
+        // upstream has trailing slash, request path is a standard absolute-path.
         assert_eq!(
             http::Uri::from_str("https://cache.nixos.org/q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo")
                 .ok(),
             derive_uri(
-                &http::Uri::from_str("https://cache.nixos.org").unwrap(),
+                &http::Uri::from_str("https://cache.nixos.org/").unwrap(),
                 Some(
-                    &http::uri::PathAndQuery::from_str("q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo")
+                    &http::uri::PathAndQuery::from_str("/q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo")
                         .unwrap()
                 )
             )
