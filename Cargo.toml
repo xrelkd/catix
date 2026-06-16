@@ -41,7 +41,7 @@ reqwest = { version = "0.11", default-features = false, features = [
   "stream",
 ] }
 tower = { version = "0.5", features = ["timeout"] }
-tower-http = { version = "0.6", features = ["trace"] }
+tower-http = { version = "0.7", features = ["trace"] }
 
 bytes         = "1"
 clap          = { version = "4", features = ["derive", "env"] }
