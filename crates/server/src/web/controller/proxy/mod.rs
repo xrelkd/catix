@@ -156,7 +156,8 @@ mod tests {
         );
 
         // Realistic production scenario from execute():
-        // upstream has trailing slash, request path is a standard absolute-path.
+        // upstream has trailing slash, request path is a standard
+        // absolute-path.
         assert_eq!(
             http::Uri::from_str("https://cache.nixos.org/q8qq40xg2grfh9ry1d9x4g7lq4ra7n81.narinfo")
                 .ok(),

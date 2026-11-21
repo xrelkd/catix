@@ -1,9 +1,9 @@
 [package]
-name                 = "catix"
-description          = "Nix binary cache proxy service"
-version.workspace    = true
-authors.workspace    = true
-homepage.workspace   = true
+name              = "catix"
+description       = "Nix binary cache proxy service"
+version.workspace = true
+authors.workspace = true
+
 readme.workspace     = true
 repository.workspace = true
 license.workspace    = true
