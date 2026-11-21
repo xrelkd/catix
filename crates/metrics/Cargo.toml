@@ -1,9 +1,9 @@
 [package]
-name                 = "catix-metrics"
-description          = "Catix metrics utilities"
-version.workspace    = true
-authors.workspace    = true
-homepage.workspace   = true
+name              = "catix-metrics"
+description       = "Catix metrics utilities"
+version.workspace = true
+authors.workspace = true
+
 repository.workspace = true
 readme.workspace     = true
 license.workspace    = true
@@ -12,12 +12,10 @@ categories.workspace = true
 keywords.workspace   = true
 
 [dependencies]
-async-trait = { workspace = true }
-tokio       = { workspace = true, features = ["net"] }
+tokio = { workspace = true, features = ["net"] }
 
-axum       = { workspace = true }
-tower      = { workspace = true, features = ["timeout"] }
-tower-http = { workspace = true, features = ["trace"] }
+axum  = { workspace = true }
+tower = { workspace = true, features = ["timeout"] }
 
 bytes      = { workspace = true }
 mime       = { workspace = true }
