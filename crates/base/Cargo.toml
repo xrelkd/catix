@@ -1,9 +1,9 @@
 [package]
-name                 = "catix-base"
-description          = "Catix"
-version.workspace    = true
-authors.workspace    = true
-homepage.workspace   = true
+name              = "catix-base"
+description       = "Catix"
+version.workspace = true
+authors.workspace = true
+
 readme.workspace     = true
 repository.workspace = true
 license.workspace    = true
@@ -14,14 +14,8 @@ keywords.workspace   = true
 [dependencies]
 serde = { workspace = true, features = ["derive"] }
 
-http = { workspace = true }
-
-bytes       = { workspace = true }
 directories = { workspace = true }
-mime        = { workspace = true }
 semver      = { workspace = true }
-snafu       = { workspace = true }
-time        = { workspace = true, features = ["formatting", "local-offset", "macros"] }
 
 [lints]
 workspace = true
