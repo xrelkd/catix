@@ -1,5 +1,5 @@
 [workspace.package]
-version      = "0.1.8"
+version      = "0.1.9"
 description  = "Nix binary cache proxy service"
 authors      = ["xrelkd <46590321+xrelkd@users.noreply.github.com>"]
 homepage     = "https://github.com/xrelkd/catix"
@@ -7,7 +7,7 @@ repository   = "https://github.com/xrelkd/catix"
 readme       = "README.md"
 license      = "GPL-3.0-only"
 edition      = "2024"
-rust-version = "1.93"
+rust-version = "1.98"
 categories   = ["proxy"]
 keywords     = ["nix", "proxy"]
 
@@ -50,7 +50,7 @@ directories   = "6"
 mime          = "0.3"
 prometheus    = "0.14"
 semver        = "1"
-shadow-rs     = "2"
+shadow-rs     = { version = "2", default-features = false, features = ["build"] }
 snafu         = "0.9"
 time          = { version = "0.3", features = ["formatting", "local-offset", "macros"] }
 
